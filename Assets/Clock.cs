@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Clock : MonoBehaviour 
 {
+	public GameObject hourHand;
+	public GameObject minuteHand;
+	public GameObject secondHand;
 
-	// Use this for initialization
 
-	
-
-	
-	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
-		Quaternion euler = Quaternion.Euler(
-			new Vector3 (0f, 0f, Time.time * 30f) );
+		DateTime time = DateTime.Now; 
+
+		int second = time.Second;
+
+		// map seconds (0,60) to a rotation (0, 360)
+		float seconds_normalized = second / 60f;
+		float seconds_degrees = seconds_normalized * 360f;
+		float clockwise_seconds = 360f - seconds_degrees;
 		
-		transform.localRotation = euler;
+		Vector3 secondsRotation = new Vector3(0f, 0f, clockwise_seconds); 
+		Quaternion secondsRotationQuat = Quaternion.Euler(secondsRotation);
+		secondHand.transform.rotation = secondsRotationQuat; 
 	
 	}
+
+
 }
