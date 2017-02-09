@@ -23,6 +23,13 @@ public class Clock : MonoBehaviour
 		Vector3 secondsRotation = new Vector3(0f, 0f, clockwise_seconds); 
 		Quaternion secondsRotationQuat = Quaternion.Euler(secondsRotation);
 		secondHand.transform.rotation = secondsRotationQuat; 
+
+		int minutes = time.Minute;
+		Vector3 minutesEuler = new Vector3 (0f, 0f (1f - (minutes / 60f)) * 360f);
+		minuteHand.transform.rotation = Quaternion.Euler (minutesEuler);
+
+		hourHand.transform.rotation = Quaternion.Euler (
+			Vector3.forward * (1f - (time.Hour / 12f) * 360f));
 	
 	}
 
